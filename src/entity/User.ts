@@ -1,4 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column, createConnection, CreateDateColumn, UpdateDateColumn} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, createConnection, CreateDateColumn, UpdateDateColumn, OneToMany} from "typeorm";
+import { Suggestion } from "./Suggestion";
 
 @Entity()
 export class User {
@@ -9,11 +10,15 @@ export class User {
     @Column()
     username: string;
 
-    @Column()
+    @Column({ unique: true })
     email: string;
     
     @Column()
     password: string;
+
+    @OneToMany(() => Suggestion, suggestion => suggestion.user)
+    suggestion: Suggestion[];
+
 
     @CreateDateColumn()
     created_at: Date
