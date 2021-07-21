@@ -11,5 +11,9 @@ export default class UserRepository extends Repository<User> {
     public async findById(id: number): Promise<User> {
         return this.findOne(id)
     }
+    
+    public async craete(date: User): Promise<User> {
+        return this.save(date)
+    }
 
 }
