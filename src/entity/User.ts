@@ -1,7 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany} from "typeorm";
-import { Suggestion } from "./Suggestion";
 
-@Entity()
+@Entity({ name: 'users' })
 export class User {
 
     @PrimaryGeneratedColumn()
@@ -16,13 +15,10 @@ export class User {
     @Column()
     password: string;
 
-    @OneToMany(() => Suggestion, suggestion => suggestion.user)
-    suggestion: Suggestion[];
-
-    @CreateDateColumn()
+    @CreateDateColumn({ name: 'created_at' })
     created_at: Date
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ name: 'updated_at' })
     updated_at: Date
 
 }

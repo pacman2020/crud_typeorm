@@ -11,7 +11,7 @@ createConnection().then(() => {
     app.use(express.json());
 
     //routes
-    app.use('users',userRoutes)
+    app.use('/users',userRoutes)
     // app.use('suggestion',suggestionRoutes)
 
     // start express server

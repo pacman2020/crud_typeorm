@@ -1,23 +1,19 @@
-import {Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
-import { User } from "./User";
+import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 
-@Entity()
+@Entity({ name: "suggestions" })
 export class Suggestion {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
-    titulo: string;
+    title: string;
 
     @Column()
     description: string;
-    
-    @ManyToOne(() => User, user => user.suggestion)
-    user: User;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ name: 'created_at' })
     created_at: Date
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ name: 'updated_at' })
     updated_at: Date
 }
