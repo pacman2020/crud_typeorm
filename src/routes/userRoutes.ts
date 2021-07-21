@@ -40,9 +40,26 @@ routes.post('/users', async (request: Request ,response: Response)=>{
         new_user.email = email
         new_user.password = password
 
-        console.log(new_user)
+        // console.log(new_user)
         const repositories = getCustomRepository(userRepository);
         const result = await repositories.save(new_user)
+
+        return response.status(201).json(result)
+
+    } catch (error) {
+        console.log('error.message :>> ', error.message);
+        return response.status(400).send();
+    }
+})
+
+routes.put('/users/:id', async (request: Request ,response: Response)=>{
+    try {
+        const repositories = getCustomRepository(userRepository);
+
+        const result = await repositories.updateUser(request.params.id, request.body)
+
+        if(!result)
+            return response.json({message: 'not found user'})
 
         return response.status(201).json(result)
 
