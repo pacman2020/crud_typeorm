@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, createConnection, CreateDateColumn, UpdateDateColumn, OneToMany} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany} from "typeorm";
 import { Suggestion } from "./Suggestion";
 
 @Entity()
@@ -19,12 +19,10 @@ export class User {
     @OneToMany(() => Suggestion, suggestion => suggestion.user)
     suggestion: Suggestion[];
 
-
     @CreateDateColumn()
     created_at: Date
 
     @UpdateDateColumn()
     updated_at: Date
-
 
 }
