@@ -68,8 +68,6 @@ routes.put('/users/:id', async (request: Request ,response: Response)=>{
         return response.status(400).send();
     }
 })
-// routes.get('/:id', user.one)
-// routes.post('/', user.save)
-// routes.delete('/:id', user.remove)
+
 
 export default routes
