@@ -8,7 +8,6 @@ export class UserService {
         const userRepository = getCustomRepository(UserRepository)
 
         const userExists = await userRepository.findOne({email})
-        console.log('-->', userExists)
 
         if(userExists){
             throw new Error('Email incorrect')

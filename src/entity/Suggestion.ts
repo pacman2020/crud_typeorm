@@ -1,4 +1,5 @@
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import {Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import { User } from "./User";
 
 @Entity({ name: "suggestions" })
 export class Suggestion {
@@ -10,6 +11,13 @@ export class Suggestion {
 
     @Column()
     description: string;
+
+    @Column()
+    user_id: number;
+
+    @JoinColumn({name: "user_id"})
+    @ManyToOne(()=> User)
+    user: User
 
     @CreateDateColumn({ name: 'created_at' })
     created_at: Date
