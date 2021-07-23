@@ -4,11 +4,13 @@ import { ISuggestionRequest } from './dto/SuggestionDto';
 
 
 export class SuggestionService {
-    async execute({title, description}: ISuggestionRequest){
+    async execute({title, description, user_id}: ISuggestionRequest){
         const suggestionRepository = getCustomRepository(SuggetionRepository)
 
         const suggestion = suggestionRepository.create({
-            title, description
+            title,
+            description,
+            user_id
         });
 
         await suggestionRepository.save(suggestion);
