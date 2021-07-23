@@ -1,6 +1,7 @@
 import { getCustomRepository } from 'typeorm'
 import { UserRepository } from '../repositories/UserRepository';
 import { IUserRequest } from './dto/UserDto';
+import * as bcrypt from 'bcrypt';
 
 
 export class UserService {
@@ -10,11 +11,13 @@ export class UserService {
         const userExists = await userRepository.findOne({email})
 
         if(userExists){
-            throw new Error('Email incorrect')
+            throw new Error('Email ja existe')
         }
 
+        const new_password = bcrypt.hashSync(password, 10)
+
         const user = userRepository.create({
-            username, email, password
+            username, email, password: new_password
         });
 
         await userRepository.save(user);
