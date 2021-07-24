@@ -5,14 +5,14 @@ import 'express-async-errors'
 import { Request, Response, NextFunction } from "express";
 import userRoutes from "./routes/userRoutes";
 import suggestionRoutes from "./routes/suggestionRoutes";
+import authenticationRoutes from "./routes/autheticationRoute";
 
-
-// create express app
 const app = express();
 app.use(express.json());
 
 //routes
 app.use(userRoutes)
+app.use(authenticationRoutes)
 app.use(suggestionRoutes)
 
 app.use((err: Error, request: Request , response: Response, next: NextFunction)=>{

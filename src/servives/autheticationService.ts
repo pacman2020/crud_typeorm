@@ -1,25 +1,32 @@
 import { getCustomRepository } from 'typeorm'
 import { UserRepository } from '../repositories/UserRepository';
 import { IAuthenticationRequest } from './dto/AuthenticationDto';
+import * as bcrypt from 'bcrypt';
+import { sign } from 'jsonwebtoken';
 
 
 export class AuthenticationService {
-    async execute({ email, password}: IAuthenticationRequest){
+    async execute({ email , password}: IAuthenticationRequest){
         const authenticationRepository = getCustomRepository(UserRepository)
 
         const userExists = await authenticationRepository.findOne({email})
 
         if(!userExists){
-            throw new Error('user not exist')
+            throw new Error('senha ou email estao incorretos')
         }
-        //validaçoes
-
-        const user = authenticationRepository.create({
-            email, password
-        });
+        
+        if(!bcrypt.compareSync(password, userExists.password)){
+            throw new Error('senha ou email estao incorretos')
+        }
 
         //token
-        await authenticationRepository.save(user);
-        return user;
+        const token = sign({
+            id: userExists.id,
+            email: userExists.email
+        }, "process.env.SECRET_KEY",{
+            expiresIn : "1d"
+        })
+
+        return token;
     }
 }

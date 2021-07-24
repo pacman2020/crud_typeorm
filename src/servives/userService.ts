@@ -5,7 +5,7 @@ import * as bcrypt from 'bcrypt';
 
 
 export class UserService {
-    async execute({username, email, password}: IUserRequest){
+    async execute({username, email, password, admin=false}: IUserRequest){
         const userRepository = getCustomRepository(UserRepository)
 
         const userExists = await userRepository.findOne({email})
@@ -17,7 +17,7 @@ export class UserService {
         const new_password = bcrypt.hashSync(password, 10)
 
         const user = userRepository.create({
-            username, email, password: new_password
+            username, email, password: new_password, admin
         });
 
         await userRepository.save(user);

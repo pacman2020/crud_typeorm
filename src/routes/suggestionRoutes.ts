@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { ensureAdmin } from '../middlewares/ensureAdmin'
 import { SuggestionController } from '../controllers/suggestionController'
+import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
 const suggestion = new SuggestionController()
 
@@ -8,7 +8,7 @@ const routes = Router();
 
 // routes.get('/', user.all)
 // routes.get('/:id', user.one)
-routes.post('/suggestion', ensureAdmin ,suggestion.registre_suggestion)
+routes.post('/suggestion', ensureAuthenticated ,suggestion.registre_suggestion)
 // routes.delete('/:id', user.remove)
 
 export default routes
