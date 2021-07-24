@@ -6,9 +6,11 @@ import { Request, Response, NextFunction } from "express";
 import userRoutes from "./routes/userRoutes";
 import suggestionRoutes from "./routes/suggestionRoutes";
 import authenticationRoutes from "./routes/autheticationRoute";
+import * as cors from 'cors';
 
 const app = express();
 app.use(express.json());
+app.use(cors())
 
 //routes
 app.use(userRoutes)

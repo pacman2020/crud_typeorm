@@ -7,7 +7,9 @@ export class SuggestionService {
     async all(){
         const suggestionRepository = getCustomRepository(SuggetionRepository)
 
-        const suggestion = suggestionRepository.find();
+        const suggestion = suggestionRepository.find({
+            relations: ['user']
+        });
 
         return suggestion;
     }
