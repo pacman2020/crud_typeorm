@@ -7,6 +7,7 @@ const user = new UserController()
 
 const routes = Router();
 
+routes.get('/users', user.all_user)
 routes.post('/users', ensureAuthenticated ,ensureAdmin , user.registre_suggestion)
 
 

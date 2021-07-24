@@ -3,6 +3,15 @@ import { SuggestionService } from '../servives/suggestionService';
 
 
 export class SuggestionController {
+    async all_suggestion(request: Request, response : Response){
+
+        const suggestionService = new SuggestionService()
+
+        const suggestion = await suggestionService.all()
+        
+        return response.status(200).json(suggestion)
+    }
+
     async registre_suggestion(request: Request, response : Response){
         const user_id = 2
         const {title, description} = request.body

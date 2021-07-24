@@ -6,7 +6,7 @@ const suggestion = new SuggestionController()
 
 const routes = Router();
 
-// routes.get('/', user.all)
+routes.get('/suggestion', suggestion.all_suggestion)
 // routes.get('/:id', user.one)
 routes.post('/suggestion', ensureAuthenticated ,suggestion.registre_suggestion)
 // routes.delete('/:id', user.remove)

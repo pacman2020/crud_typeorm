@@ -5,6 +5,14 @@ import * as bcrypt from 'bcrypt';
 
 
 export class UserService {
+    async all(){
+        const userRepository = getCustomRepository(UserRepository)
+
+        const users = userRepository.find();
+
+        return users;
+    }
+
     async execute({username, email, password, admin=false}: IUserRequest){
         const userRepository = getCustomRepository(UserRepository)
 
