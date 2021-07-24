@@ -8,18 +8,20 @@ export class SuggestionController {
         const suggestionService = new SuggestionService()
 
         const suggestion = await suggestionService.all()
-        
+
         return response.status(200).json(suggestion)
     }
 
     async registre_suggestion(request: Request, response : Response){
-        const user_id = 2
+        const { userId } = request
+        console.log(userId)
+        
         const {title, description} = request.body
         
         const suggestionService = new SuggestionService()
 
         const suggestion = await suggestionService.execute({
-            title, description, user_id
+            title, description, user_id: userId
         })
 
         return response.json(suggestion)

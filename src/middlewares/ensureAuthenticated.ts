@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 
 interface IPayload{
-    sub: string;
+    id: Number;
 }
 
 
@@ -17,10 +17,10 @@ export function ensureAuthenticated(
         return response.status(401).end()
     }
     try {
-        const token = authtoken.split(" ")[1]
-        const {sub} = verify(token, "process.env.SECRET_KEY") as IPayload
+        const token = authtoken.split(" ")
 
-        request.userId = sub
+        const { id } = verify(token[1], "process.env.SECRET_KEY") as IPayload
+        request.userId = id
 
         next()
         
