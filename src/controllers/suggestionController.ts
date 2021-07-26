@@ -5,7 +5,7 @@ import { SuggestionService } from '../servives/suggestionService';
 export class SuggestionController {
     async all_suggestion(request: Request, response : Response){
 
-        const suggestionService = new SuggestionService()
+        const suggestionService = new SuggestionService() 
 
         const suggestion = await suggestionService.all()
 
@@ -29,7 +29,7 @@ export class SuggestionController {
         
         const suggestionService = new SuggestionService()
 
-        const suggestion = await suggestionService.execute({
+        const suggestion = await suggestionService.create({
             title, description, user_id: userId
         })
 
@@ -48,5 +48,14 @@ export class SuggestionController {
         })
 
         return response.json(suggestion)
+    }
+
+    async destroy_suggestion(request: Request, response : Response){
+
+        const suggestionService = new SuggestionService()
+
+        await suggestionService.destroy(Number(request.params.id))
+
+        return response.status(200).json('deleted suggestion')
     }
 }

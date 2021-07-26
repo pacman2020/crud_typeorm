@@ -7,9 +7,7 @@ export class SuggestionService {
     async all(){
         const suggestionRepository = getCustomRepository(SuggetionRepository)
 
-        const suggestion = suggestionRepository.find({
-            relations: ['user']
-        });
+        const suggestion = await suggestionRepository.find();
 
         return suggestion;
     }
@@ -22,7 +20,7 @@ export class SuggestionService {
         return user;
     }
 
-    async execute({title, description, user_id}: ISuggestionRequest){
+    async create({title, description, user_id}: ISuggestionRequest){
         const suggestionRepository = getCustomRepository(SuggetionRepository)
 
         const suggestion = suggestionRepository.create({
@@ -49,6 +47,14 @@ export class SuggestionService {
             description: description,
             user_id: user_id
         });
+
+        return suggestion;
+    }
+
+    async destroy(id:number ){
+        const suggestionRepository = getCustomRepository(SuggetionRepository)
+
+        const suggestion = await suggestionRepository.delete(id);
 
         return suggestion;
     }
