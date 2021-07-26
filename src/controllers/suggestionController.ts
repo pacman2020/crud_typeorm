@@ -11,6 +11,15 @@ export class SuggestionController {
 
         return response.status(200).json(suggestion)
     }
+    
+    async find_By_suggestion(request: Request, response : Response){
+
+        const suggestionService = new SuggestionService()
+
+        const suggestion = await suggestionService.one(Number(request.params.id))
+
+        return response.status(200).json(suggestion)
+    }
 
     async registre_suggestion(request: Request, response : Response){
         const { userId } = request

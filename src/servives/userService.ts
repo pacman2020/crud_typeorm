@@ -13,6 +13,8 @@ export class UserService {
         return users;
     }
 
+   
+
     async execute({username, email, password, admin=false}: IUserRequest){
         const userRepository = getCustomRepository(UserRepository)
 
