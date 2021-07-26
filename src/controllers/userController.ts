@@ -22,4 +22,14 @@ export class UserController {
 
         return response.status(200).json(user)
     }
+
+    async delete_user(request: Request, response : Response){
+
+        const userService = new UserService()
+
+        await userService.destroy(Number(request.params.id))
+        
+        return response.status(200).json('user deleted')
+    }
+
 }

@@ -12,6 +12,15 @@ export class UserService {
 
         return users;
     }
+    
+    async destroy(id: number){
+        const userRepository = getCustomRepository(UserRepository)
+
+        const users = await userRepository.delete(id);
+        console.log('--->', users)
+
+        return users;
+    }
 
    
 

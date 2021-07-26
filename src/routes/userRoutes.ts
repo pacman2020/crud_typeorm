@@ -7,8 +7,9 @@ const user = new UserController()
 
 const routes = Router();
 
-routes.get('/users', user.all_user)
+routes.get('/users',  user.all_user)
 routes.post('/users', ensureAuthenticated ,ensureAdmin , user.registre_suggestion)
+routes.delete('/users/:id', user.delete_user )
 
 
 export default routes
