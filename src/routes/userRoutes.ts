@@ -9,7 +9,7 @@ const routes = Router();
 
 routes.get('/users',  user.all_user)
 routes.post('/users', ensureAuthenticated ,ensureAdmin , user.registre_suggestion)
-routes.delete('/users/:id', user.delete_user )
+routes.delete('/users/:id', ensureAuthenticated ,ensureAdmin , user.delete_user )
 
 
 export default routes

@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import { UserRepository } from '../repositories/UserRepository';
 import { IUserRequest } from './dto/UserDto';
 import * as bcrypt from 'bcrypt';
+import { request } from 'express';
 
 
 export class UserService {
