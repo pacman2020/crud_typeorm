@@ -35,4 +35,18 @@ export class SuggestionController {
 
         return response.json(suggestion)
     }
+    
+    async update_suggestion(request: Request, response : Response){
+        const { userId } = request
+        
+        const {title, description} = request.body
+        
+        const suggestionService = new SuggestionService()
+
+        const suggestion = await suggestionService.update(Number(request.params.id),{
+            title, description, user_id: userId
+        })
+
+        return response.json(suggestion)
+    }
 }

@@ -18,7 +18,6 @@ export class UserService {
         const userRepository = getCustomRepository(UserRepository)
 
         const users = await userRepository.delete(id);
-        console.log('--->', users)
 
         return users;
     }

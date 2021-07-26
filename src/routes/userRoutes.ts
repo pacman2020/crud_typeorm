@@ -7,7 +7,7 @@ const user = new UserController()
 
 const routes = Router();
 
-routes.get('/users',  user.all_user)
+routes.get('/users',ensureAuthenticated ,ensureAdmin , user.all_user)
 routes.post('/users', ensureAuthenticated ,ensureAdmin , user.registre_suggestion)
 routes.delete('/users/:id', ensureAuthenticated ,ensureAdmin , user.delete_user )
 

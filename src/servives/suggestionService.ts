@@ -34,4 +34,22 @@ export class SuggestionService {
         await suggestionRepository.save(suggestion);
         return suggestion;
     }
+    
+    async update(id:number ,{title, description, user_id}: ISuggestionRequest){
+        const suggestionRepository = getCustomRepository(SuggetionRepository)
+
+        const suggestion = suggestionRepository.create({ 
+                title,
+                description,
+                user_id
+            })
+
+        await suggestionRepository.update(id,{ 
+            title: title,
+            description: description,
+            user_id: user_id
+        });
+
+        return suggestion;
+    }
 }
