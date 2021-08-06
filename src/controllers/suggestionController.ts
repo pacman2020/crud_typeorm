@@ -6,8 +6,8 @@ export class SuggestionController {
     async all_suggestion(request: Request, response : Response){
 
         const suggestionService = new SuggestionService() 
-
         const suggestion = await suggestionService.all()
+        console.log('---', suggestion)
 
         return response.status(200).json(suggestion)
     }
@@ -30,7 +30,7 @@ export class SuggestionController {
         const suggestionService = new SuggestionService()
 
         const suggestion = await suggestionService.create({
-            title, description, user_id: userId
+            title, description, user_id: Number(userId)
         })
 
         return response.json(suggestion)
@@ -44,7 +44,7 @@ export class SuggestionController {
         const suggestionService = new SuggestionService()
 
         const suggestion = await suggestionService.update(Number(request.params.id),{
-            title, description, user_id: userId
+            title, description, user_id: Number(userId)
         })
 
         return response.json(suggestion)

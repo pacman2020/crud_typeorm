@@ -16,7 +16,8 @@ export class Suggestion {
     user_id: number;
 
     @JoinColumn({name: "user_id"})
-    @ManyToOne(()=> User)
+    @ManyToOne(()=> User, {eager: true})
+
     user: User
 
     @CreateDateColumn({ name: 'created_at' })

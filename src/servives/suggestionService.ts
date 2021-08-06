@@ -4,6 +4,7 @@ import { ISuggestionRequest } from './dto/SuggestionDto';
 
 
 export class SuggestionService {
+
     async all(){
         const suggestionRepository = getCustomRepository(SuggetionRepository)
 
@@ -42,11 +43,7 @@ export class SuggestionService {
                 user_id
             })
 
-        await suggestionRepository.update(id,{ 
-            title: title,
-            description: description,
-            user_id: user_id
-        });
+        await suggestionRepository.update(id, suggestion);
 
         return suggestion;
     }

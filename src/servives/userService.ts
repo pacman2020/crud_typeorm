@@ -2,8 +2,12 @@ import { getCustomRepository } from 'typeorm'
 import { UserRepository } from '../repositories/UserRepository';
 import { IUserRequest } from './dto/UserDto';
 import * as bcrypt from 'bcrypt';
-import { request } from 'express';
+import { validate } from 'class-validator';
+import { stringify } from 'querystring';
 
+interface ListConstraints{
+    constraints : String;
+}
 
 export class UserService {
     async all(){
@@ -21,7 +25,6 @@ export class UserService {
 
         return users;
     }
-
    
 
     async execute({username, email, password, admin=false}: IUserRequest){
@@ -38,6 +41,18 @@ export class UserService {
         const user = userRepository.create({
             username, email, password: new_password, admin
         });
+
+        const erros = await validate(user)
+
+        if(erros.length > 0 ){
+            //create a list of errors
+            let msgErro = {'erros': []}
+
+            erros.map((e)=>{
+                msgErro.erros.push(e.constraints)
+            })
+            return msgErro
+        }
 
         await userRepository.save(user);
         return user;

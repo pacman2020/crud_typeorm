@@ -13,14 +13,18 @@ export class UserController {
     }
 
 
-    async registre_suggestion(request: Request, response : Response){
-        const {title, description} = request.body
+    async registre_user(request: Request, response : Response){
         
         const userService = new UserService()
 
         const user = await userService.execute(request.body)
 
-        return response.status(200).json(user)
+        if(user['erros']){
+            return response.status(400).json(user['erros'])
+        }
+
+        return response.status(200).json(user)        
+
     }
 
     async delete_user(request: Request, response : Response){

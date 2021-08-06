@@ -1,3 +1,4 @@
+import { IsEmail, MaxLength, Min, MinLength } from "class-validator";
 import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany} from "typeorm";
 
 @Entity({ name: 'users' })
@@ -7,9 +8,11 @@ export class User {
     id: number;
 
     @Column()
+    @MinLength(5, {message: 'username deve ter no minimo 5 caracteris'})
     username: string;
 
     @Column({ unique: true })
+    @IsEmail()
     email: string;
     
     @Column()
