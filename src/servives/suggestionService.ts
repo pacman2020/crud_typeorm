@@ -1,3 +1,4 @@
+import { validate } from 'class-validator';
 import { getCustomRepository } from 'typeorm'
 import { SuggetionRepository } from '../repositories/SuggestionRepository';
 import { ISuggestionRequest } from './dto/SuggestionDto';
@@ -30,6 +31,18 @@ export class SuggestionService {
             user_id
         });
 
+        const erros = await validate(suggestion)
+
+        if(erros.length > 0 ){
+            //create a list of errors
+            let msgErro = {'erros': []}
+
+            erros.map((e)=>{
+                msgErro.erros.push(e.constraints)
+            })
+            return msgErro
+        }
+
         await suggestionRepository.save(suggestion);
         return suggestion;
     }
@@ -42,6 +55,19 @@ export class SuggestionService {
                 description,
                 user_id
             })
+
+        //refatora codigo em função
+        const erros = await validate(suggestion)
+
+        if(erros.length > 0 ){
+                //create a list of errors
+                let msgErro = {'erros': []}
+    
+                erros.map((e)=>{
+                    msgErro.erros.push(e.constraints)
+                })
+                return msgErro
+            }
 
         await suggestionRepository.update(id, suggestion);
 

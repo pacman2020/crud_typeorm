@@ -3,11 +3,7 @@ import { UserRepository } from '../repositories/UserRepository';
 import { IUserRequest } from './dto/UserDto';
 import * as bcrypt from 'bcrypt';
 import { validate } from 'class-validator';
-import { stringify } from 'querystring';
 
-interface ListConstraints{
-    constraints : String;
-}
 
 export class UserService {
     async all(){
@@ -55,6 +51,10 @@ export class UserService {
         }
 
         await userRepository.save(user);
+
+        //removing user information
+        delete user['password']
+        delete user['admin']
         return user;
     }
 }

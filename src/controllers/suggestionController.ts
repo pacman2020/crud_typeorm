@@ -33,6 +33,11 @@ export class SuggestionController {
             title, description, user_id: Number(userId)
         })
 
+        if(suggestion['erros']){
+            return response.status(400).json(suggestion['erros'])
+        }
+
+
         return response.json(suggestion)
     }
     
@@ -46,6 +51,10 @@ export class SuggestionController {
         const suggestion = await suggestionService.update(Number(request.params.id),{
             title, description, user_id: Number(userId)
         })
+
+        if(suggestion['erros']){
+            return response.status(400).json(suggestion['erros'])
+        }
 
         return response.json(suggestion)
     }

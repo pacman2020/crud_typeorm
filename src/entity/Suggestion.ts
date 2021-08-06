@@ -1,3 +1,4 @@
+import { MinLength } from "class-validator";
 import {Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 import { User } from "./User";
 
@@ -7,6 +8,7 @@ export class Suggestion {
     id: number;
 
     @Column()
+    @MinLength(4)
     title: string;
 
     @Column()
@@ -16,7 +18,7 @@ export class Suggestion {
     user_id: number;
 
     @JoinColumn({name: "user_id"})
-    @ManyToOne(()=> User, {eager: true})
+    @ManyToOne(()=> User)
 
     user: User
 

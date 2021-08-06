@@ -23,6 +23,7 @@ export class UserController {
             return response.status(400).json(user['erros'])
         }
 
+
         return response.status(200).json(user)        
 
     }
